@@ -36,12 +36,12 @@ Prerequisites
 
 1. Clone the repository:
 
-   git clone https://github.com/yourusername/nodejs-chat-api.git
-   cd nodejs-chat-api
+   `git clone https://github.com/jlukenoff/nodejs-task-manager.git
+   cd nodejs-task-manager`
 
 2. Install the dependencies:
 
-   npm install
+   `npm install`
 
 Building the Project
 
@@ -53,7 +53,7 @@ Running the Project
 
 To start the server, run:
 
-npm start
+`npm start`
 
 The server will start on http://localhost:3000.
 
