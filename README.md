@@ -36,8 +36,9 @@ Prerequisites
 
 1. Clone the repository:
 
-   `git clone https://github.com/jlukenoff/nodejs-task-manager.git
-   cd nodejs-task-manager`
+   `git clone https://github.com/jlukenoff/nodejs-task-manager.git`
+
+   `cd nodejs-task-manager`
 
 2. Install the dependencies:
 
