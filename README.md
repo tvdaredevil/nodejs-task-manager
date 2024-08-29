@@ -64,17 +64,17 @@ For development, you can run the client and server separately:
 
 - To start the client in development mode:
 
-  npm run dev:client
+  `npm run dev:client`
 
 - To start the server in development mode:
 
-  npm run dev:server
+  `npm run dev:server`
 
 Running Tests
 
 To run the tests, use:
 
-npm test
+`npm test`
 
 License
 
