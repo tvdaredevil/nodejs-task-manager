@@ -72,11 +72,11 @@ export class AuthController {
   }
 
   static async login(req: Request, res: Response) {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     const userRepository = appDataSource.getRepository(User);
 
     const user = await userRepository.findOne({
-      where: { email },
+      where: { username },
       select: ["id", "password"],
     });
 
@@ -87,7 +87,7 @@ export class AuthController {
     AuthController.handleSuccessfulLogin(res, user);
   }
 
-  static async logout(req: Request, res: Response) {
+  static async logout(_: Request, res: Response) {
     res.clearCookie("token");
     res.redirect("/login");
   }
