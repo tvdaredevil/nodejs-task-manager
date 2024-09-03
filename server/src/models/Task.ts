@@ -18,6 +18,6 @@ export class Task {
   @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
   timestamp: Date;
 
-  @ManyToOne(() => User, (user) => user.Tasks)
+  @ManyToOne(() => User, (user) => user.tasks)
   user: User;
 }

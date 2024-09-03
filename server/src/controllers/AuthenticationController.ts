@@ -3,8 +3,16 @@ import { User } from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { appDataSource } from "../dataSource";
+import { AUTH_DISABLED } from "../constants";
 
 export class AuthController {
+  private static TEST_USER = {
+    id: 1,
+    username: "admin",
+    email: "test@test.com",
+    password: "password",
+    tasks: [],
+  };
   private static SECRET_KEY = "secretkey";
 
   private static getSignedJwtForUser(user: User) {
@@ -13,11 +21,32 @@ export class AuthController {
     });
   }
 
-  public static authenticateRequest(
+  private static async maybeCreateUser(user: User) {
+    const userRepository = appDataSource.getRepository(User);
+    const maybeUser = await userRepository.findOneBy({ id: user.id });
+
+    if (!maybeUser) {
+      const newUser = userRepository.create({ ...user });
+      await userRepository.save(newUser);
+      return newUser;
+    }
+
+    return maybeUser;
+  }
+
+  public static async authenticateRequest(
     req: Request,
     res: Response,
     next: Function
   ) {
+    if (AUTH_DISABLED) {
+      const user = await AuthController.maybeCreateUser(
+        AuthController.TEST_USER
+      );
+      res.locals.userId = user.id.toString();
+      return next();
+    }
+
     const token = req.cookies["token"];
     if (!token) {
       return res.redirect("/login");

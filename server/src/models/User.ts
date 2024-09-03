@@ -18,6 +18,6 @@ export class User {
   @Column({ select: false })
   password: string;
 
-  @OneToMany(() => Task, (Task) => Task.user)
-  Tasks: Task[];
+  @OneToMany(() => Task, (task) => task.user)
+  tasks: Task[];
 }
