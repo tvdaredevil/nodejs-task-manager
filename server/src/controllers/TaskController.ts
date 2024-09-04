@@ -28,12 +28,12 @@ export class TaskController {
 
   static async getTasks(_: Request, res: Response) {
     const { userId } = res.locals;
-    const TaskRepository = appDataSource.getRepository(Task);
-    const Tasks = await TaskRepository.find({
+    const taskRepository = appDataSource.getRepository(Task);
+    const tasks = await taskRepository.find({
       relations: ["user"],
       where: { user: { id: parseInt(userId) } },
     });
-    res.json(Tasks);
+    res.json(tasks);
   }
 
   static async updateTask(
