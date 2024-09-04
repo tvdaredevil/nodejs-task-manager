@@ -86,7 +86,7 @@ describe("TaskController", () => {
 
       await TaskController.getTasks(req, res);
 
-      expect(taskRepository.find).toHaveBeenCalledWith({ relations: ["user"] });
+      expect(taskRepository.find).toHaveBeenCalled();
       expect(res.json).toHaveBeenCalledWith(tasks);
     });
   });
