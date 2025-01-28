@@ -11,6 +11,7 @@ function App() {
   const [newTask, setNewTask] = React.useState<TaskInput>({
     title: "",
     content: "",
+    userPrefIdx: tasks.length+1
   });
 
   React.useEffect(() => {
@@ -29,8 +30,11 @@ function App() {
 
   const handleCreateTask = async () => {
     const task = await createTask(newTask);
-    setTasks([...tasks, task]);
-    setNewTask({ title: "", content: "" });
+    tasks.push(task)
+    const sortedTasks = tasks.sort((a, b) => a.userPrefIdx - b.userPrefIdx)
+    setTasks([...sortedTasks])
+    setNewTask({ title: "", content: "", userPrefIdx: tasks.length + 1});
+    console.log("Creating a task with order", newTask.userPrefIdx)
     closeModal();
   };
 
@@ -101,6 +105,15 @@ function App() {
                 value={newTask.content}
                 onChange={(e) =>
                   setNewTask({ ...newTask, content: e.target.value })
+                }
+              />
+              <input
+                type="number"
+                className="w-full p-2 border rounded m-2"
+                placeholder="Type your task order preference..."
+                value={newTask.userPrefIdx}
+                onChange={(e) =>
+                  setNewTask({ ...newTask, userPrefIdx: parseInt(e.target.value)})
                 }
               />
               <button

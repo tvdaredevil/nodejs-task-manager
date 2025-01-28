@@ -6,6 +6,7 @@ import { appDataSource } from "../dataSource";
 interface TaskInput {
   title: string;
   content: string;
+  userPrefIdx: number;
 }
 
 export class TaskController {
